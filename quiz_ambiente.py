@@ -1,10 +1,9 @@
 import streamlit as st
-import random  # Para fun facts aleatórios
 
 # 🎨 Configurações da página
 st.set_page_config(page_title="Quiz Ambiental Interativo 🌿", page_icon="🌎", layout="centered")
 
-# 🌿 Estilo personalizado (CSS responsivo com animações)
+# 🌿 Estilo personalizado (CSS responsivo e simplificado)
 st.markdown("""
     <style>
         body {
@@ -18,40 +17,43 @@ st.markdown("""
         }
         .main {
             background: rgba(255, 255, 255, 0.85);
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0px 0px 15px rgba(0, 100, 0, 0.2);
-            animation: slideIn 0.8s ease-out;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0px 0px 10px rgba(0, 100, 0, 0.1);
+            animation: slideIn 0.6s ease-out;
         }
         @keyframes slideIn {
-            from { transform: translateY(20px); opacity: 0; }
+            from { transform: translateY(10px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
-        h1, h2 {
+        h1, h2, h3 {
             text-align: center;
             color: #2b7a0b;
+            font-size: 20px;  /* Fonte base maior para visibilidade */
         }
         .question-container {
             background-color: #ffffff;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            border-left: 5px solid #4CAF50;
-            animation: fadeInUp 0.5s ease; /* Animação para cada pergunta */
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 3px solid #4CAF50;  /* Borda mais simples */
+            animation: fadeInUp 0.5s ease;
+            overflow: auto;  /* Evita sobreposição */
         }
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .stSlider {
             width: 100%;
-            margin: 10px 0;
+            margin: 20px 0;  /* Mais espaço ao redor */
+            font-size: 16px;  /* Fonte maior para mobile */
         }
         .stButton>button {
             background: linear-gradient(90deg, #4CAF50, #2e8b57);
             color: white;
             font-size: 16px;
-            padding: 10px 20px;
+            padding: 10px 15px;
             border-radius: 10px;
             border: none;
             transition: 0.3s;
@@ -65,27 +67,33 @@ st.markdown("""
         .stButton>button:hover {
             transform: scale(1.05);
         }
-        /* Media queries para responsividade */
+        /* Media queries aprimoradas para mobile */
         @media (max-width: 600px) {
             .main {
                 padding: 10px;
-                border-radius: 10px;
+                border-radius: 5px;
             }
-            h1, h2 {
-                font-size: 18px;
+            h1, h2, h3 {
+                font-size: 16px;
             }
             .question-container {
-                padding: 15px;
+                padding: 10px;
                 font-size: 14px;
+                margin: 10px 0;
             }
             .stSlider {
                 font-size: 14px;
+                margin: 10px 0;
+            }
+            .stButton>button {
+                font-size: 14px;
+                padding: 8px 12px;
             }
         }
     </style>
 """, unsafe_allow_html=True)
 
-# Lista de perguntas modificadas para sim/não/às vezes
+# Lista de perguntas e fun facts
 perguntas = [
     "Você evita jogar lixo em locais inadequados?",
     "Você separa materiais recicláveis em casa?",
@@ -99,18 +107,17 @@ perguntas = [
     "Você acha importante cobrar políticas públicas ambientais?"
 ]
 
-# Fun facts relacionados às perguntas (agora específicos)
 fun_facts = [
-    "Evitar lixo ajuda a preservar rios e oceanos.",  # Relacionado à pergunta 1
-    "Reciclagem reduz o desperdício e economiza recursos naturais.",  # Pergunta 2
-    "Reduzir plástico protege animais marinhos da poluição.",  # Pergunta 3
-    "Economizar água preserva ecossistemas aquáticos.",  # Pergunta 4
-    "Desligar aparelhos diminui a emissão de gases de efeito estufa.",  # Pergunta 5
-    "Ações de preservação ajudam a manter a biodiversidade.",  # Pergunta 6
-    "Compras conscientes reduzem o impacto no clima global.",  # Pergunta 7
-    "Atitudes individuais podem inspirar mudanças coletivas.",  # Pergunta 8
-    "Aprender sobre o meio ambiente promove a sustentabilidade.",  # Pergunta 9
-    "Políticas ambientais protegem florestas e espécies em risco."  # Pergunta 10
+    "Evitar lixo ajuda a preservar rios e oceanos.",
+    "Reciclagem reduz o desperdício e economiza recursos naturais.",
+    "Reduzir plástico protege animais marinhos da poluição.",
+    "Economizar água preserva ecossistemas aquáticos.",
+    "Desligar aparelhos diminui a emissão de gases de efeito estufa.",
+    "Ações de preservação ajudam a manter a biodiversidade.",
+    "Compras conscientes reduzem o impacto no clima global.",
+    "Atitudes individuais podem inspirar mudanças coletivas.",
+    "Aprender sobre o meio ambiente promove a sustentabilidade.",
+    "Políticas ambientais protegem florestas e espécies em risco."
 ]
 
 # Função para tela de início
@@ -119,32 +126,30 @@ def tela_inicio():
     st.markdown("Responda 'Sim', 'Às vezes' ou 'Não' para cada pergunta.")
     if st.button("Iniciar Quiz 🌱"):
         st.session_state['quiz_iniciado'] = True
-        st.session_state['pergunta_atual'] = 0  # Inicia na primeira pergunta
-        st.session_state['respostas'] = []  # Lista para armazenar respostas
+        st.session_state['pergunta_atual'] = 0
+        st.session_state['respostas'] = []
 
-# Função para exibir uma pergunta por vez com animação
+# Função para exibir uma pergunta por vez
 def exibir_pergunta():
     if 'pergunta_atual' in st.session_state and st.session_state['pergunta_atual'] < len(perguntas):
         idx = st.session_state['pergunta_atual']
         pergunta = perguntas[idx]
-        fun_fact = fun_facts[idx]  # Fun fact relacionado à pergunta
+        fun_fact = fun_facts[idx]
         
         st.markdown(f"<div class='question-container'><h3>{pergunta}</h3><p><i>{fun_fact}</i></p></div>", unsafe_allow_html=True)
         
-        # Slider de 1-3 com rótulos personalizados
         resposta = st.slider("Responda: 1 - Não, 2 - Às vezes, 3 - Sim", 1, 3, 2, key=f"slider_{idx}")
         
         if st.button("Próxima pergunta"):
             st.session_state['respostas'].append(resposta)
-            st.session_state['pergunta_atual'] += 1  # Avança para a próxima
+            st.session_state['pergunta_atual'] += 1
     else:
-        # Todas as perguntas respondidas
         exibir_resultado(st.session_state['respostas'])
 
 # Função para exibir resultado
 def exibir_resultado(respostas):
     total = sum(respostas)
-    max_pontos = len(respostas) * 3  # Agora escala de 1-3
+    max_pontos = len(respostas) * 3
     proporcao = total / max_pontos if max_pontos > 0 else 0
     
     st.subheader("📊 Seu Resultado Final 📊")
@@ -170,3 +175,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
