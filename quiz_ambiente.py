@@ -3,23 +3,24 @@ import streamlit as st
 # 🎨 Configurações da página
 st.set_page_config(page_title="Quiz Ambiental Interativo 🌿", page_icon="🌎", layout="centered")
 
-# 🌿 Estilo personalizado (CSS responsivo e simplificado)
+# 🌿 Estilo personalizado (CSS com nova paleta de cores)
 st.markdown("""
     <style>
         body {
-            background: linear-gradient(180deg, #dfffe2, #a8e6cf) fixed;
+            background: linear-gradient(180deg, #2E8B57, #3CB371);  /* Novo gradiente: verde escuro para médio, menos claro */
             font-family: 'Segoe UI', sans-serif;
             animation: fadeIn 1s ease-in;
+            color: #006400;  /* Texto principal em verde escuro para melhor contraste */
         }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
         .main {
-            background: rgba(255, 255, 255, 0.85);
+            background: #F0FFF0;  /* Fundo mais suave, mas não tão claro quanto antes */
             border-radius: 15px;
             padding: 15px;
-            box-shadow: 0px 0px 10px rgba(0, 100, 0, 0.1);
+            box-shadow: 0px 0px 10px rgba(0, 50, 0, 0.2);  /* Sombra mais sutil */
             animation: slideIn 0.6s ease-out;
         }
         @keyframes slideIn {
@@ -28,17 +29,18 @@ st.markdown("""
         }
         h1, h2, h3 {
             text-align: center;
-            color: #2b7a0b;
-            font-size: 20px;  /* Fonte base maior para visibilidade */
+            color: #006400;  /* Verde escuro para títulos */
+            font-size: 20px;
         }
         .question-container {
-            background-color: #ffffff;
+            background-color: #F5FFFA;  /* Fundo muito leve, mas com contraste melhor */
             border-radius: 10px;
             padding: 15px;
             margin: 15px 0;
-            border-left: 3px solid #4CAF50;  /* Borda mais simples */
+            border-left: 3px solid #2E8B57;  /* Borda em verde escuro */
             animation: fadeInUp 0.5s ease;
-            overflow: auto;  /* Evita sobreposição */
+            overflow: auto;
+            color: #006400;  /* Texto dentro do container em verde escuro */
         }
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(10px); }
@@ -46,12 +48,13 @@ st.markdown("""
         }
         .stSlider {
             width: 100%;
-            margin: 20px 0;  /* Mais espaço ao redor */
-            font-size: 16px;  /* Fonte maior para mobile */
+            margin: 20px 0;
+            font-size: 16px;
+            color: #006400;  /* Cor do texto no slider */
         }
         .stButton>button {
-            background: linear-gradient(90deg, #4CAF50, #2e8b57);
-            color: white;
+            background: linear-gradient(90deg, #2E8B57, #3CB371);  /* Gradiente mais escuro para botões */
+            color: white;  /* Texto branco para contraste */
             font-size: 16px;
             padding: 10px 15px;
             border-radius: 10px;
@@ -67,7 +70,7 @@ st.markdown("""
         .stButton>button:hover {
             transform: scale(1.05);
         }
-        /* Media queries aprimoradas para mobile */
+        /* Media queries aprimoradas */
         @media (max-width: 600px) {
             .main {
                 padding: 10px;
@@ -175,4 +178,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
