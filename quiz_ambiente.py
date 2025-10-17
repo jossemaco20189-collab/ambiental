@@ -251,7 +251,7 @@ if st.session_state.get('finished'):
             dicas.append('Foque em reduzir desperdício e economizar água: pequenos hábitos diários geram grande impacto.')
         else:
             dicas.append('Ótimo! Ajude outras pessoas compartilhando o que sabe e engajando em ações comunitárias.')
-        dicas.append('Participe de campanhas locais e proponha ideias à sua escola ou comunidade.')  # Linha corrigida
+        dicas.append('Participe de campanhas locais e proponha ideias à sua escola ou comunidade.')
         dicas.append('Considere plantar árvores ou apoiar projetos de restauração em sua região.')
         
         st.markdown('<ul>', unsafe_allow_html=True)
@@ -261,4 +261,4 @@ if st.session_state.get('finished'):
         
         col1, col2, col3 = st.columns([1,1,1])
         with col1:
-           
+            if st.button('🎉
