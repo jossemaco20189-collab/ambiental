@@ -201,7 +201,12 @@ if 'iniciado' not in st.session_state or not st.session_state.get('iniciado'):
 if st.session_state.get('iniciado'):
     idx = st.session_state['cur_idx']
     perguntas_idx = st.session_state['perguntas_idx']
+    if idx < len(perguntas_idx):
     qidx = perguntas_idx[idx]
+else:
+    st.session_state["fase"] = "resultado"
+    st.rerun()
+    st.stop()
     pergunta = QUESTOES[qidx]
     max_p = len(QUESTOES) * 5
 
@@ -326,4 +331,5 @@ def exibir_resultado(respostas, nome_usuario):
 # - Se quiser, posso exportar este script em arquivo .py pronto para download ou adaptá-lo para suportar
 #   persistência real de ranking (banco de dados ou arquivo JSON no servidor).
 # - Posso também converter a interface para usar customtkinter ou Pygame se preferir um app desktop.
+
 
