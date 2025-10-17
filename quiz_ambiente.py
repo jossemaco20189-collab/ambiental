@@ -6,8 +6,8 @@ import json
 
 # ---------------------------------------------
 # Quiz Ambiental Interativo — Versão Aprimorada
-# Arquivo: quiz_ambiental_streamlit_enhanced.py
-# Execute com: streamlit run quiz_ambiental_streamlit_enhanced.py
+# Arquivo: quiz_ambiente.py
+# Execute com: streamlit run quiz_ambiente.py
 # Objetivo: transformar o quiz original em uma experiência mais imersiva,
 # com transições, feedback animado, gamificação, dicas educativas e confetes.
 # Tudo roda dentro do Streamlit sem dependências extras além do próprio Streamlit.
@@ -188,7 +188,7 @@ if st.session_state.get('iniciado'):
     idx = st.session_state['cur_idx']
     perguntas_idx = st.session_state['perguntas_idx']
     
-    if idx < len(perguntas_idx):  # Correção: Verifica se o índice é válido
+    if idx < len(perguntas_idx):  # Verifica se o índice é válido
         qidx = perguntas_idx[idx]
         pergunta = QUESTOES[qidx]
         max_p = len(QUESTOES) * 5
@@ -225,13 +225,12 @@ if st.session_state.get('iniciado'):
                 st.markdown('</div>', unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
     else:
-        # Correção: Se o índice ultrapassar, vá para o resultado
         st.session_state['finished'] = True
         st.experimental_rerun()
 
 if st.session_state.get('finished'):
     respostas = st.session_state.get('respostas', [])
-    if len(respostas) > 0:  # Correção: Verifica se há respostas antes de prosseguir
+    if len(respostas) > 0:  # Verifica se há respostas antes de prosseguir
         total = sum(respostas)
         max_p = len(QUESTOES) * 5
         categoria, emoji = calcular_categoria(total, max_p)
@@ -252,4 +251,14 @@ if st.session_state.get('finished'):
             dicas.append('Foque em reduzir desperdício e economizar água: pequenos hábitos diários geram grande impacto.')
         else:
             dicas.append('Ótimo! Ajude outras pessoas compartilhando o que sabe e engajando em ações comunitárias.')
-        dicas.append('Participe de campanhas
+        dicas.append('Participe de campanhas locais e proponha ideias à sua escola ou comunidade.')  # Linha corrigida
+        dicas.append('Considere plantar árvores ou apoiar projetos de restauração em sua região.')
+        
+        st.markdown('<ul>', unsafe_allow_html=True)
+        for d in dicas:
+            st.markdown(f"<li class='small-muted'>{d}</li>", unsafe_allow_html=True)
+        st.markdown('</ul>', unsafe_allow_html=True)
+        
+        col1, col2, col3 = st.columns([1,1,1])
+        with col1:
+           
