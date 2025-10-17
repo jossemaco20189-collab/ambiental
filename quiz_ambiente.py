@@ -261,5 +261,6 @@ if st.session_state.get('finished'):
         
         col1, col2, col3 = st.columns([1,1,1])
         with col1:
-            if st.button('🎉'
+            if st.button('🎉')
+
 
