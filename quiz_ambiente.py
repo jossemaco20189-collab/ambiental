@@ -259,8 +259,7 @@ if st.session_state.get('finished'):
             st.markdown(f"<li class='small-muted'>{d}</li>", unsafe_allow_html=True)
         st.markdown('</ul>', unsafe_allow_html=True)
         
-        col1, col2, col3 = st.columns([1,1,1])
-        with col1:
-            if st.button('🎉')
-
-
+        if st.button('🔁 Reiniciar quiz'):
+            st.session_state.pop('perguntas_idx', None)
+            st.session_state.pop('respostas', None)
+            st.session_state.pop('cur
