@@ -159,7 +159,7 @@ if not st.session_state.get('iniciado'):
             <source src="https://cdn.pixabay.com/download/audio/2021/09/27/audio_13ec4d7a28.mp3" type="audio/mpeg">
         </audio>
         """, unsafe_allow_html=True)
-        st.experimental_rerun()
+        st.rerun()
     st.markdown('</div>', unsafe_allow_html=True)
 
 # Perguntas
@@ -210,3 +210,4 @@ if st.session_state.get('finished'):
         st.session_state.clear()
         st.experimental_rerun()
     st.markdown('</div>', unsafe_allow_html=True)
+
