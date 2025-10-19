@@ -243,7 +243,7 @@ if not st.session_state['iniciado'] and not st.session_state['finished']:
             st.rerun()
     with col2:
         if st.button("Ver instruções ⓘ"):
-            st.info("Responda cada pergunta em escala de 1 (discordo totalmente) a 5 (concordo totalmente). Ao salvar, você verá feedback animado e uma dica relacionada.")
+            st.info("Responda cada pergunta em escala de 1 (Nunca faço isso) a 5 (Sempre faço isso). Ao salvar, você verá feedback animado e uma dica relacionada.")
     with col3:
         if st.button("Exibir perguntas (modo rápido)"):
             # abrir modo rápido abaixo (fallback)
