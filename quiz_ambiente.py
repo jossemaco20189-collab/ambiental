@@ -300,8 +300,8 @@ if st.session_state['iniciado'] and not st.session_state['finished']:
 
         col_main_q, col_side_q = st.columns([3,1])
         with col_main_q:
-            # pergunta: slider 1-5 (1=discordo totalmente ... 5=concordo totalmente)
-            resposta = st.slider("Escolha sua resposta:", 1, 5, 3, key=f'q_{idx}', help='1 = Discordo totalmente ... 5 = Concordo totalmente')
+            # pergunta: slider 1-5 (1=Nunca faço isso ... 5=Sempre faço isso)
+            resposta = st.slider("Escolha sua resposta:", 1, 5, 3, key=f'q_{idx}', help='1 = Nunca faço isso ... 5 = Sempre faço isso')
             st.markdown(f"<div class='small-muted'>Dica: {pergunta['hint']}</div>", unsafe_allow_html=True)
             st.markdown(f"<div class='small-muted'>Fun Fact: {pergunta['fact']}</div>", unsafe_allow_html=True)
         with col_side_q:
