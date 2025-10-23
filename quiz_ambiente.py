@@ -250,4 +250,5 @@ with st.sidebar:
         for i, item in enumerate(ranking[:8], start=1):
             st.write(f"{i}. {item['nome'] or 'Anônimo'} — {item['pontos']} pts")
     else:
-        st.write("Seja o primeiro a marcar pontos
+        st.write("Seja o primeiro a marcar pontos")
+
